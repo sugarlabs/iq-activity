@@ -1,0 +1,8 @@
+[Activity]
+name = IQ
+activity_version = 22
+host_version = 1
+bundle_id = mulawa.IQ
+icon = activity
+show_launcher = yes
+exec = sugar-activity activity.PeterActivity
