@@ -6,4 +6,5 @@ bundle_id = mulawa.IQ
 icon = activity
 show_launcher = yes
 exec = sugar-activity activity.PeterActivity
+license = GPLv3+
 repository = https://github.com/sugarlabs/iq-activity.git
