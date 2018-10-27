@@ -1,6 +1,7 @@
 import os
 from gi.repository import Gtk
 from gi.repository import GLib
+from gi.repository import GObject
 import pygame
 import event
 
@@ -12,7 +13,7 @@ class PygameCanvas(Gtk.EventBox):
     mainwindow is the activity intself.
     """
     def __init__(self, mainwindow, pointer_hint = True):
-        GLib.GLib.__init__(self)
+        GObject.GObject.__init__(self)
 
         global CANVAS
         assert CANVAS == None, "Only one PygameCanvas can be created, ever."
