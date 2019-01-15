@@ -20,6 +20,7 @@ NUMBERS={pygame.K_1:1,pygame.K_2:2,pygame.K_3:3,pygame.K_4:4,\
 
 def init(): # called by run()
     random.seed()
+    pygame.init()
     global redraw
     global screen,w,h,font1,font2,clock
     global factor,offset,imgf,message,version_display
