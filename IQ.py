@@ -61,7 +61,7 @@ class IQ:
         g.puzzle_n=g.solved
         if g.puzzle_n==10: g.puzzle_n=0
         iq1.init(); iq1.setup()
-        if self.canvas<>None: self.canvas.grab_focus()
+        if self.canvas!=None: self.canvas.grab_focus()
         ctrl=False
         pygame.key.set_repeat(600,120); key_ms=pygame.time.get_ticks()
         going=True
@@ -78,7 +78,7 @@ class IQ:
                 elif event.type == pygame.MOUSEMOTION:
                     g.pos=event.pos
                     g.redraw=True
-                    if self.canvas<>None: self.canvas.grab_focus()
+                    if self.canvas!=None: self.canvas.grab_focus()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     g.redraw=True
                     if event.button==1: self.do_click(); self.flush_queue()
