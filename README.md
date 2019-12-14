@@ -1,4 +1,6 @@
-A simple iq-activity for sugar.
+#IQ-Activity#
+
+A simple sugar activity.
 
 Please refer to;
 
