@@ -1,23 +1,23 @@
 # activity.py
 # my standard link between sugar and my activity
 
+import IQ
+import load_save
+import sugargame.canvas
+from sugar3.activity.activity import PREVIEW_SIZE
+from sugar3.graphics.toolbarbox import ToolbarButton
+from sugar3.activity.widgets import StopButton
+from sugar3.activity.widgets import ActivityToolbarButton
+from sugar3.graphics.toolbarbox import ToolbarBox
+from sugar3.activity import activity
+import pygame
+from gi.repository import GLib
+from gi.repository import Gtk
 from gettext import gettext as _
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
-from gi.repository import GLib
-import pygame
-from sugar3.activity import activity
-from sugar3.graphics.toolbarbox import ToolbarBox
-from sugar3.activity.widgets import ActivityToolbarButton
-from sugar3.activity.widgets import StopButton
-from sugar3.graphics.toolbarbox import ToolbarButton
-from sugar3.activity.activity import PREVIEW_SIZE
-import sugargame.canvas
-import load_save
 
-import IQ
 
 class PeterActivity(activity.Activity):
     def __init__(self, handle):
@@ -28,14 +28,11 @@ class PeterActivity(activity.Activity):
         # Create the game instance.
         self.game = IQ.IQ(self)
 
-        # Call the toolbar method
-        
-
         # Note that set_canvas implicitly calls
         # read_file when resuming from the Journal.
         self._pygamecanvas = sugargame.canvas.PygameCanvas(
-                self, main=self.game.run,
-                modules=[pygame.display])
+            self, main=self.game.run,
+            modules=[pygame.display])
 
         self.set_canvas(self._pygamecanvas)
         self._pygamecanvas.grab_focus()
@@ -63,11 +60,10 @@ class PeterActivity(activity.Activity):
         stop_button.show()
         self.show_all()
 
-
     def read_file(self, file_path):
         try:
             f = open(file_path, 'r')
-        except:
+        except Exception:
             return  # ****
         load_save.load(f)
         f.close()

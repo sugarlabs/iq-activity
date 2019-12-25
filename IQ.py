@@ -22,12 +22,11 @@ import pygame
 import os
 import sys
 import random
-import iq1
 try:
     import gi
     gi.require_version('Gtk', '3.0')
     from gi.repository import Gtk
-except:
+except ModuleNotFoundError:
     pass
 
 RED, BLUE, GREEN, BLACK, WHITE = (
@@ -49,13 +48,14 @@ class TN:
         self.xy = (x, y)
         self.img = img
 
-        
+
 class IQ:
 
     def __init__(self, parent):
         self.parent = parent
         self.journal = True  # set to False if we come in via main()
-        self.canvas = None  # set to the pygame canvas if we come in via activity.py
+        # set to the pygame canvas if we come in via activity.py
+        self.canvas = None
         self.loaded = []  # list of strings
         # numbered 0 to 9 - piece 0 is fixed in top left
         self.puzzles = [
@@ -74,7 +74,6 @@ class IQ:
         self.pieces = []
         self.tns = []
         self.z = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-
 
     def display(self):
         self.screen.fill((128, 0, 0))
@@ -111,7 +110,7 @@ class IQ:
         try:
             for line in f.readlines():
                 self.loaded.append(line)
-        except:
+        except Exception:
             pass
 
     def save(self, f):
@@ -169,7 +168,8 @@ class IQ:
             self.bgd = self.frame.get_at((50, 50))
         except Exception as e:
             self.frame = pygame.image.load('data/frame.png')
-            self.bgd = self.frame.get_at((50, 50))    
+            self.bgd = self.frame.get_at((50, 50))
+            print("Peter says: Fallback to pygame image loader. Warning : ", e)
         self.frame2 = self.load_image('frame2.png', False)
         self.redrawn = False  # used to make sure new puzzle thumbnail appears
         self.smiley = self.load_image('smiley.png', True)
@@ -183,12 +183,7 @@ class IQ:
 
     def run(self):
         pygame.init()
-        #if self.parent is not None:
-        #    print((self.parent.x_s, self.parent.y_s))
-        #    pygame.display.set_mode((self.parent.x_s, self.parent.y_s))
-
         screen = pygame.display.get_surface()
-        print(screen)
         screen.fill((0, 0, 0))
         pygame.display.update()
 
@@ -225,7 +220,7 @@ class IQ:
                 elif event.type == pygame.MOUSEMOTION:
                     self.pos = event.pos
                     self.redraw = True
-                    if self.canvas != None:
+                    if self.canvas is not None:
                         self.canvas.grab_focus()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     self.redraw = True
@@ -277,7 +272,7 @@ class IQ:
     def qsave(self):
         dir = ''
         dir = os.environ.get('SUGAR_ACTIVITY_ROOT')
-        if dir == None:
+        if dir is None:
             dir = ''
         fname = os.path.join(dir, 'data', 'iq.dat')
         f = open(fname, 'w')
@@ -287,16 +282,16 @@ class IQ:
     def qload(self):
         dir = ''
         dir = os.environ.get('SUGAR_ACTIVITY_ROOT')
-        if dir == None:
+        if dir is None:
             dir = ''
         fname = os.path.join(dir, 'data', 'iq.dat')
         try:
             f = open(fname, 'r')
-        except:
+        except Exception:
             return None  # ****
         try:
             self.load(f)
-        except:
+        except Exception:
             pass
         f.close
 
@@ -481,7 +476,8 @@ class IQ:
             pygame.draw.rect(
                 self.screen, BLUE, (x-d-self.sy(.05), y-d, w+2*d, h+2*d))
             self.screen.blit(text, (x, y))
-            centre_blit(self.screen, self.sparkle, (x-d+self.sy(.05), y+h/2-self.sy(.2)))
+            centre_blit(self.screen, self.sparkle,
+                        (x-d+self.sy(.05), y+h/2-self.sy(.2)))
 
     def display_number(self, n, xxx_todo_changeme9, font, colour=BLACK, bgd=None, outline_font=None):
         (cx, cy) = xxx_todo_changeme9
@@ -535,7 +531,7 @@ class IQ:
         if n < 0:
             return -1
         return 1
-    
+
     def which_piece(self):
         for ind in range(1, 10):  # piece 0 is fixed
             ind1 = 10-ind
@@ -556,7 +552,6 @@ class IQ:
             if self.mouse_on_img(tn.img, tn.xy):
                 return ind  # puzzle number
         return -1
-
 
     # Code from self.py STARTS HERE
 
@@ -591,7 +586,6 @@ class IQ:
             y += y0
             self.tn.xy = (x, y)
 
-
     def iqsetup(self):
         self.puzzle = self.puzzles[self.puzzle_n]
         x1 = self.sx(.2)
@@ -617,7 +611,6 @@ class IQ:
         self.finished = False
         self.redrawn = False
 
-
     def draw(self):
         x, y = self.tns[0].xy
         dx = self.sy(.5)
@@ -642,7 +635,6 @@ class IQ:
             x = mx-self.dx
             y = my-self.dy
             self.screen.blit(self.carry.img, (x, y))
-
 
     def click(self):
         if self.carry != None:
@@ -670,7 +662,6 @@ class IQ:
             return True
         return False
 
-
     def try_grid(self):
         pce = self.carry
         w = pce.img.get_width()
@@ -692,7 +683,6 @@ class IQ:
                 if (x1+w) > x2:
                     break
             y1 += self.sq
-
 
     def complete(self):
         if self.finished:
@@ -718,7 +708,6 @@ class IQ:
 # Code from self.py ENDS HERE
 
 
-
 if __name__ == "__main__":
     pygame.init()
     pygame.display.set_mode((1024, 768))
@@ -728,5 +717,3 @@ if __name__ == "__main__":
     pygame.display.quit()
     pygame.quit()
     sys.exit(0)
-
-
