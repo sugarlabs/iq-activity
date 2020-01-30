@@ -1,14 +1,14 @@
 What is this?
 =============
 
-IQ Activity is a geometry puzzle game based on arranging shapes to fit correctly.
+IQ is a geometry puzzle game based on arranging shapes to fit correctly.
 
 
 
 How to use?
 ===========
 
-IQ Activity is not part of the Sugar desktop, but can be added. Please refer to;
+IQ is not part of the Sugar desktop, but can be added. Please refer to;
 
 * [How to Get Sugar on sugarlabs.org](https://sugarlabs.org/),
 * [How to use Sugar](https://help.sugarlabs.org/).
