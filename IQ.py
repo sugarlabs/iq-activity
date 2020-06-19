@@ -437,8 +437,8 @@ class IQ:
 
     def mouse_on_img1(self, img, coordinates):
         (cx, cy) = coordinates
-        xy = centre_to_top_left(img, (cx, cy))
-        return mouse_on_img(img, xy)
+        xy = self.centre_to_top_left(img, (cx, cy))
+        return self.mouse_on_img(img, xy)
 
     def mouse_on_img_rect(self, img, coordinates):
         (cx, cy) = coordinates
@@ -448,7 +448,7 @@ class IQ:
         y1 = cy-h2
         x2 = cx+w2
         y2 = cy+h2
-        return mouse_in(x1, y1, x2, y2)
+        return self.mouse_in(x1, y1, x2, y2)
 
     def mouse_in(self, x1, y1, x2, y2):
         mx, my = self.pos
@@ -463,7 +463,7 @@ class IQ:
         return True
 
     def mouse_in_rect(self, rect):  # x,y,w,h
-        return mouse_in(rect[0], rect[1], rect[0]+rect[2], rect[1]+rect[3])
+        return self.mouse_in(rect[0], rect[1], rect[0]+rect[2], rect[1]+rect[3])
 
     def display_score(self):
         if pygame.font:
@@ -482,11 +482,11 @@ class IQ:
     def display_number(self, n, coordinates, font, colour=BLACK, bgd=None, outline_font=None):
         (cx, cy) = coordinates
         if pygame.font:
-            if bgd == None:
+            if bgd is None:
                 text = font.render(str(n), True, colour)
             else:
                 text = font.render(str(n), True, colour, bgd)
-            if outline_font != None:
+            if outline_font is not None:
                 outline = outline_font.render(str(n), True, BLACK)
                 self.centre_blit(self.screen, outline, (cx, cy))
             self.centre_blit(self.screen, text, (cx, cy))
@@ -630,14 +630,14 @@ class IQ:
             pce = self.pieces[self.z[ind]]
             if pce != self.carry:
                 self.screen.blit(pce.img, pce.xy)
-        if self.carry != None:
+        if self.carry is not None:
             mx, my = self.pos
             x = mx-self.dx
             y = my-self.dy
             self.screen.blit(self.carry.img, (x, y))
 
     def click(self):
-        if self.carry != None:
+        if self.carry is not None:
             mx, my = self.pos
             x = mx-self.dx
             y = my-self.dy
@@ -646,7 +646,7 @@ class IQ:
             self.carry = None
             return True
         pce = self.which_piece()
-        if pce != None:
+        if pce is not None:
             x, y = pce.xy
             mx, my = self.pos
             self.dx = mx-x
