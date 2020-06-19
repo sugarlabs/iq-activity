@@ -2,7 +2,6 @@
 # my standard link between sugar and my activity
 
 import IQ
-import load_save
 import sugargame.canvas
 from sugar3.activity.activity import PREVIEW_SIZE
 from sugar3.graphics.toolbarbox import ToolbarButton
@@ -65,7 +64,7 @@ class PeterActivity(activity.Activity):
             f = open(file_path, 'r')
         except Exception:
             return  # ****
-        load_save.load(f)
+        self.game.load(f)
         f.close()
 
     def write_file(self, file_path):
