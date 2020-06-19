@@ -3,16 +3,12 @@
 
 import IQ
 import sugargame.canvas
-from sugar3.activity.activity import PREVIEW_SIZE
-from sugar3.graphics.toolbarbox import ToolbarButton
 from sugar3.activity.widgets import StopButton
 from sugar3.activity.widgets import ActivityToolbarButton
 from sugar3.graphics.toolbarbox import ToolbarBox
 from sugar3.activity import activity
 import pygame
-from gi.repository import GLib
 from gi.repository import Gtk
-from gettext import gettext as _
 
 import gi
 gi.require_version('Gtk', '3.0')
