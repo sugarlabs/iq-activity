@@ -299,7 +299,7 @@ class IQ:
         self.message = self.app+' '+self.ver
         self.message += '  '+str(self.screen.get_width())+' x ' + \
             str(self.screen.get_height())
-        message(self.screen, self.font1, self.message)
+        self.message_func(self.screen, self.font1, self.message)
 
     # loads an image (eg pic.png) from the data subdirectory
     # converts it for optimum display
@@ -393,7 +393,7 @@ class IQ:
     # d is the # of pixels in the border around the text
     # (cx,cy) = co-ords centre - (0,0) means use screen centre
 
-    def message(self, screen, font, m, xxx_todo_changeme5=(0, 0), d=20):
+    def message_func(self, screen, font, m, xxx_todo_changeme5=(0, 0), d=20):
         (cx, cy) = xxx_todo_changeme5
         if m != '':
             if pygame.font:
@@ -476,7 +476,7 @@ class IQ:
             pygame.draw.rect(
                 self.screen, BLUE, (x-d-self.sy(.05), y-d, w+2*d, h+2*d))
             self.screen.blit(text, (x, y))
-            centre_blit(self.screen, self.sparkle,
+            self.centre_blit(self.screen, self.sparkle,
                         (x-d+self.sy(.05), y+h/2-self.sy(.2)))
 
     def display_number(self, n, xxx_todo_changeme9, font, colour=BLACK, bgd=None, outline_font=None):
@@ -488,8 +488,8 @@ class IQ:
                 text = font.render(str(n), True, colour, bgd)
             if outline_font != None:
                 outline = outline_font.render(str(n), True, BLACK)
-                centre_blit(self.screen, outline, (cx, cy))
-            centre_blit(self.screen, text, (cx, cy))
+                self.centre_blit(self.screen, outline, (cx, cy))
+            self.centre_blit(self.screen, text, (cx, cy))
 
     def display_number1(self, n, xxx_todo_changeme10, font, colour=BLACK):
         (x, cy) = xxx_todo_changeme10
@@ -502,7 +502,7 @@ class IQ:
         (cx, cy) = xxx_todo_changeme11
         if pygame.font:
             text = font.render(str(n), True, colour)
-            centre_blit(screen, text, (cx, cy))
+            self.centre_blit(screen, text, (cx, cy))
 
     def display_number3(self, screen, n, xxx_todo_changeme12, font, colour=BLACK):
         (x, y) = xxx_todo_changeme12
