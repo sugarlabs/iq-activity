@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # IQ.py
 
 # Copyright (C) 2011  Peter Hewitt
@@ -349,8 +349,9 @@ class IQ:
             l1.remove(lst[r])
         return lt
 
-    def centre_blit(self, screen, img, coordinates, angle=0):  # rotation is clockwise
-        (cx, cy) = coordinates
+    def centre_blit(self, screen, img, coordinates, angle=0):
+        # rotation is clockwise
+        cx, cy = coordinates
         img1 = img
         if angle != 0:
             img1 = pygame.transform.rotate(img, -angle)
@@ -358,8 +359,8 @@ class IQ:
         screen.blit(img1, (cx-rect.width/2, cy-rect.height/2))
 
     def text_blit(self, screen, s, font, coordinates, color, shadow=True):
-        (cx, cy) = coordinates
-        (r, g, b) = color
+        cx, cy = coordinates
+        r, g, b = color
         if shadow:
             text = font.render(s, True, (0, 0, 0))
             rect = text.get_rect()
@@ -374,8 +375,8 @@ class IQ:
         return rect
 
     def text_blit1(self, screen, s, font, coordinates, color, shadow=True):
-        (x, y) = coordinates
-        (r, g, b) = color
+        x, y = coordinates
+        r, g, b = color
         if shadow:
             text = font.render(s, True, (0, 0, 0))
             rect = text.get_rect()
@@ -394,7 +395,7 @@ class IQ:
     # (cx,cy) = co-ords centre - (0,0) means use screen centre
 
     def message_func(self, screen, font, m, coordinates=(0, 0), d=20):
-        (cx, cy) = coordinates
+        cx, cy = coordinates
         if m != '':
             if pygame.font:
                 text = font.render(m, True, (255, 255, 255))
@@ -415,7 +416,7 @@ class IQ:
                 screen.blit(text, rect)
 
     def mouse_on_img(self, img, coordinates):  # x,y=top left
-        (x, y) = coordinates
+        x, y = coordinates
         w = img.get_width()
         h = img.get_height()
         mx, my = self.pos
@@ -436,12 +437,12 @@ class IQ:
         return True
 
     def mouse_on_img1(self, img, coordinates):
-        (cx, cy) = coordinates
+        cx, cy = coordinates
         xy = self.centre_to_top_left(img, (cx, cy))
         return self.mouse_on_img(img, xy)
 
     def mouse_on_img_rect(self, img, coordinates):
-        (cx, cy) = coordinates
+        cx, cy = coordinates
         w2 = img.get_width()/2
         h2 = img.get_height()/2
         x1 = cx-w2
@@ -463,7 +464,8 @@ class IQ:
         return True
 
     def mouse_in_rect(self, rect):  # x,y,w,h
-        return self.mouse_in(rect[0], rect[1], rect[0]+rect[2], rect[1]+rect[3])
+        return self.mouse_in(rect[0], rect[1], rect[0]+rect[2],
+                             rect[1]+rect[3])
 
     def display_score(self):
         if pygame.font:
@@ -477,10 +479,11 @@ class IQ:
                 self.screen, BLUE, (x-d-self.sy(.05), y-d, w+2*d, h+2*d))
             self.screen.blit(text, (x, y))
             self.centre_blit(self.screen, self.sparkle,
-                        (x-d+self.sy(.05), y+h/2-self.sy(.2)))
+                             (x-d+self.sy(.05), y+h/2-self.sy(.2)))
 
-    def display_number(self, n, coordinates, font, colour=BLACK, bgd=None, outline_font=None):
-        (cx, cy) = coordinates
+    def display_number(self, n, coordinates, font, colour=BLACK,
+                       bgd=None, outline_font=None):
+        cx, cy = coordinates
         if pygame.font:
             if bgd is None:
                 text = font.render(str(n), True, colour)
@@ -492,20 +495,20 @@ class IQ:
             self.centre_blit(self.screen, text, (cx, cy))
 
     def display_number1(self, n, coordinates, font, colour=BLACK):
-        (x, cy) = coordinates
+        x, cy = coordinates
         if pygame.font:
             text = font.render(str(n), True, colour)
             y = cy-text.get_height()/2
             self.screen.blit(text, (x, y))
 
     def display_number2(self, screen, n, coordinates, font, colour=BLACK):
-        (cx, cy) = coordinates
+        cx, cy = coordinates
         if pygame.font:
             text = font.render(str(n), True, colour)
             self.centre_blit(screen, text, (cx, cy))
 
     def display_number3(self, screen, n, coordinates, font, colour=BLACK):
-        (x, y) = coordinates
+        x, y = coordinates
         if pygame.font:
             lead = 0
             if n < 10:
@@ -516,13 +519,13 @@ class IQ:
             screen.blit(text, (lead+x, y))
 
     def top_left_to_centre(self, img, coordinates):
-        (x, y) = coordinates
+        x, y = coordinates
         cx = x+img.get_width()/2
         cy = y+img.get_height()/2
         return (cx, cy)
 
     def centre_to_top_left(self, img, coordinates):
-        (cx, cy) = coordinates
+        cx, cy = coordinates
         x = cx-img.get_width()/2
         y = cy-img.get_height()/2
         return (x, y)
