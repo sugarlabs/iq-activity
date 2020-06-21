@@ -84,14 +84,7 @@ class IQ:
     def do_click(self):
         return self.click()
 
-    def do_button(self, bu):
-        if bu == 'new':
-            pass
-
     def do_key(self, key):
-        if key in self.SQUARE:
-            self.do_button('new')
-            return
         if key == pygame.K_v:
             self.version_display = not self.version_display
             return
