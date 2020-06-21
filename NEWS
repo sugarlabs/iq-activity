@@ -1,0 +1,17 @@
+v23
+
+* Fix Attribute Error (Jui Pradhan),
+* Add screenshots of solutions for all levels (Jui Pradhan),
+* Fix Undefined name error for function calls (Jui Pradhan),
+* Fix variable and function names (Jui Pradhan),
+* Remove unused imports (Jui Pradhan),
+* Fix Python3 port regressions (Jui Pradhan),
+* Port to Python3 (Srevin Saju),
+* Add and update README.md (Ayush Nawal, Steven Higgins, James Cameron),
+* Port from GObject to GLib (Tonatiuh Garcia),
+* Port to Gtk+3 (Yash Agrawal),
+* Fix license and activity metadata (Yash Agrawal),
+* Added COPYING and changed metadata (Sidhant Bhavnani)
+
+v1
+* Initial Release
